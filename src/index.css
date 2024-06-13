@@ -1,5 +1,12 @@
 :root {
+  --primary-color: #512689;
+  --white-color: #FFFFFF;
+  --black-color: #151317;
+  --gray-color: #808185;
+  --light-gray-color: #F8F8F8;
+  --error-color: #FF6161;
 
+  --max-width: 1440px;
 }
 
 body {

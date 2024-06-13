@@ -5,16 +5,18 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ErrorPage from './pages/ErrorPage/ErrorPage.tsx';
 import UserPage from './pages/UserPage/UserPage.tsx';
 import AllUsersPage from './pages/AllUsersPage/AllUsersPage.tsx';
+import { RequireAuth } from './helpers/RequireAuth.tsx';
+import { RegisterPage } from './pages/RegisterPage/RegisterPage.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: '<RequireAuth/>',
+    element: (
+      <RequireAuth>
+        <AllUsersPage />
+      </RequireAuth>
+    ),
     children: [
-      {
-        path: '/',
-        element: <AllUsersPage />,
-      },
       {
         path: '/users/:id',
         element: <UserPage />,
@@ -22,18 +24,8 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: '/auth',
-    element: '<AuthLayout />',
-    children: [
-      {
-        path: 'login',
-        element: '<Login />',
-      },
-      {
-        path: 'register',
-        element: '<Register />',
-      },
-    ],
+    path: '/register',
+    element: <RegisterPage />,
   },
   {
     path: '*',
