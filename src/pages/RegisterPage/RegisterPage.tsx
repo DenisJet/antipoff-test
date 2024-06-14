@@ -39,19 +39,19 @@ export function RegisterPage() {
         <h2>Регистрация</h2>
         <div className={styles.field}>
           <label htmlFor='name'>Имя</label>
-          <input id='name' name='name' type='text' placeholder='Ваше имя' />
+          <input id='name' name='name' type='text' placeholder='Ваше имя' required />
         </div>
         <div className={styles.field}>
           <label htmlFor='email'>Электронная почта</label>
-          <input id='email' name='email' type='text' placeholder='example@mail.ru' />
+          <input id='email' name='email' type='email' placeholder='example@mail.ru' required />
         </div>
         <div className={styles.field}>
           <label htmlFor='password'>Пароль</label>
-          <input id='password' name='password' type='text' placeholder='Введите пароль' />
+          <input id='password' name='password' type='text' placeholder='Введите пароль' required />
         </div>
         <div className={styles.field}>
           <label htmlFor='confirm'>Подтвердите пароль</label>
-          <input id='confirm' name='confirm' type='text' placeholder='Подтвердите пароль' />
+          <input id='confirm' name='confirm' type='text' placeholder='Подтвердите пароль' required />
         </div>
         <button className={styles.button}>Зарегистрироваться</button>
       </form>
