@@ -149,6 +149,23 @@
   .backButton {
     display: block;
   }
+
+  .main {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    justify-items: center;
+    gap: 40px;
+    padding-top: 48px;
+    padding-right: 80px;
+    padding-left: 100px;
+    max-width: 100%;
+  }
+
+  .contacts {
+    grid-column: -1 / -2;
+    grid-row: 1 / 2;
+    justify-self: start;
+  }
 }
 
 @media screen and (width >= 1440px) {
@@ -157,25 +174,15 @@
     padding-right: 80px;
   }
 
-  .main {
-    display: grid;
-    grid-template-columns: 3fr 2fr;
-    padding-top: 48px;
-    padding-left: 297px;
-    padding-right: 80px;
-    max-width: 100%;
-  }
-
-  .contacts {
-    grid-column: -1 / -2;
-    grid-row: 1 / 2;
-  }
-
   .logoutButton {
     right: 80px;
   }
 
   .backButton {
     left: 80px;
+  }
+
+  .main {
+    padding-left: 197px;
   }
 }

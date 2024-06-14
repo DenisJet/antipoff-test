@@ -50,7 +50,7 @@ export default function AllUsersPage() {
       </header>
       <main className={styles.main}>
         {error && <>{error}</>}
-        {!isLoading && (
+        {!isLoading && !error && (
           <>
             <UserList users={users} />
             <button className={styles.buttonMore} type='button'>

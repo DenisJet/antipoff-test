@@ -37,6 +37,7 @@
 .logoutButton {
   cursor: pointer;
   color: var(--white-color);
+  font-size: 16px;
   background-color: var(--primary-color);
   padding: 8px 16px;
   border: 1px solid var(--light-gray-color);
