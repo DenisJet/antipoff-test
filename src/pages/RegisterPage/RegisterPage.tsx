@@ -41,7 +41,6 @@ export function RegisterPage() {
 
   const emailHandler = (e) => {
     setEmail(e.target.value);
-    console.log(!emailValidation(e.target.value));
     if (!emailValidation(e.target.value)) {
       setEmailError(true);
     } else {
@@ -62,11 +61,9 @@ export function RegisterPage() {
     switch (e.target.name) {
       case 'email':
         setEmailDirty(true);
-        setEmailError(true);
         break;
       case 'password':
         setPasswordDirty(true);
-        setPasswordError(true);
         break;
     }
   };
@@ -102,6 +99,7 @@ export function RegisterPage() {
         <div className={styles.field}>
           <label htmlFor='email'>Электронная почта</label>
           <input
+            className={emailError ? styles.inputError : ''}
             value={email}
             onChange={(e) => emailHandler(e)}
             onBlur={(e) => blurHandler(e)}
@@ -113,8 +111,11 @@ export function RegisterPage() {
           {emailDirty && emailError && <small className={styles.error}>Ошибка</small>}
         </div>
         <div className={styles.field}>
-          <label htmlFor='password'>Пароль</label>
+          <label htmlFor='password'>
+            Пароль <small className={styles.passwordSmall}>(более 3х символов)</small>
+          </label>
           <input
+            className={passwordError ? styles.inputError : ''}
             value={password}
             onChange={(e) => passwordHandler(e)}
             onBlur={(e) => blurHandler(e)}

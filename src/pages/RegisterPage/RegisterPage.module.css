@@ -52,12 +52,20 @@
 }
 
 .button:disabled {
-  opacity: 0.5;
   cursor: not-allowed;
 }
 
 .error {
-  color: var(--error-color)
+  color: var(--error-color);
+  font-size: 10px;
+}
+
+.passwordSmall {
+  color: var(--gray-color);
+}
+
+.field .inputError {
+  border: 1px solid var(--error-color);
 }
 
 @media screen and (width >= 900px) {
