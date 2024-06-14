@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './UserCard.module.css';
 
 export interface UserCardProps {
@@ -10,12 +11,12 @@ export interface UserCardProps {
 
 export default function UserCard(user: UserCardProps) {
   return (
-    <div className={styles.card}>
+    <Link to={`/users/${user.id}`} className={styles.card}>
       <img src={user.avatar} alt={user.first_name + ' ' + user.last_name} className={styles.avatar} />
       <p className={styles.name}>{user.first_name + ' ' + user.last_name}</p>
       <button className={styles.button} type='button'>
         <img src='/like.svg' alt='иконка лайка' />
       </button>
-    </div>
+    </Link>
   );
 }

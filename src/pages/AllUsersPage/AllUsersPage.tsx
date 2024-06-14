@@ -6,7 +6,7 @@ import { getUsersData } from '../../helpers/API';
 
 export default function AllUsersPage() {
   const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | undefined>();
   const navigate = useNavigate();
 
