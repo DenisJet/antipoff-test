@@ -70,21 +70,13 @@ export function RegisterPage() {
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
-    const target = e.target as typeof e.target & RegisterForm;
-    const { email, password } = target;
 
-    if (emailValidation(email.value)) {
-      setEmailError(false);
-
-      const res = await register({ email: email.value, password: password.value });
-      if (res.token) {
-        localStorage.setItem('token', res.token);
-        navigate('/');
-      }
+    const res = await register({ email, password });
+    if (res.token) {
+      localStorage.setItem('token', res.token);
+      navigate('/');
     } else {
-      console.log(emailError);
-      setEmailError(true);
-      return;
+      alert(res.error);
     }
   };
 
