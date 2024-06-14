@@ -19,10 +19,8 @@ export default function AllUsersPage() {
       setIsLoading(true);
       const { data } = await getUsersData();
       setUsers(data);
-      console.log(data);
       setIsLoading(false);
     } catch (error) {
-      console.log(error);
       setError('Не удалось загрузить данные...');
       setIsLoading(false);
     }
@@ -52,7 +50,15 @@ export default function AllUsersPage() {
       </header>
       <main className={styles.main}>
         {error && <>{error}</>}
-        {!isLoading && <UserList users={users} />}
+        {!isLoading && (
+          <>
+            <UserList users={users} />
+            <button className={styles.buttonMore} type='button'>
+              Показать ещё
+              <img src='/more.svg' alt='' />
+            </button>
+          </>
+        )}
         {isLoading && <>Загрузка...</>}
       </main>
     </>
