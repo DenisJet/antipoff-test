@@ -5,7 +5,7 @@
 .headerContainer {
   color: var(--white-color);
   text-align: center;
-  padding: 32px 20px 64px;
+  padding: 64px 20px;
   position: relative;
   max-width: var(--max-width);
   margin-left: auto;
@@ -25,6 +25,7 @@
 }
 
 .logoutButtonMobile {
+  cursor: pointer;
   background-color: transparent;
   border: none;
   padding: 0;
@@ -32,7 +33,9 @@
   top: 12px;
   right: 16px;
 }
+
 .logoutButton {
+  cursor: pointer;
   color: var(--white-color);
   background-color: var(--primary-color);
   padding: 8px 16px;
@@ -43,7 +46,17 @@
   display: none;
 }
 
+.main {
+  padding: 32px 35px;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+}
+
 @media screen and (width >= 700px) {
+  .headerContainer {
+    padding-top: 32px;
+  }
   .headerTitle {
     font-size: 64px;
   }
@@ -63,6 +76,11 @@
 
 @media screen and (width >= 1440px) {
   .headerContainer {
+    padding-left: 80px;
+    padding-right: 80px;
+  }
+
+  .main {
     padding-left: 80px;
     padding-right: 80px;
   }

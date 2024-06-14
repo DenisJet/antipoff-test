@@ -1,15 +1,47 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './AllUsersPage.module.css';
+import UserList from '../../components/UserList/UserList';
+import { useEffect, useState } from 'react';
+import { getUsersData } from '../../helpers/API';
 
 export default function AllUsersPage() {
+  const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | undefined>();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const getUsers = async () => {
+    try {
+      setIsLoading(true);
+      const { data } = await getUsersData();
+      setUsers(data);
+      console.log(data);
+      setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+      setError('Не удалось загрузить данные...');
+      setIsLoading(false);
+    }
+  };
+
+  const logout = () => {
+    localStorage.removeItem('token');
+    navigate('/register');
+  };
+
   return (
     <>
       <header className={styles.header}>
         <div className={styles.headerContainer}>
-          <button className={styles.logoutButtonMobile} type='button'>
+          <button className={styles.logoutButtonMobile} type='button' onClick={logout}>
             <img src='/logout.svg' alt='иконка выхода' />
           </button>
-          <button className={styles.logoutButton} type='button'>
-            Закрыть
+          <button className={styles.logoutButton} type='button' onClick={logout}>
+            Выход
           </button>
           <h1 className={styles.headerTitle}>Наша команда</h1>
           <p className={styles.headerText}>
@@ -18,7 +50,11 @@ export default function AllUsersPage() {
           </p>
         </div>
       </header>
-      <main>AllUsersPage</main>
+      <main className={styles.main}>
+        {error && <>{error}</>}
+        {!isLoading && <UserList users={users} />}
+        {isLoading && <>Загрузка...</>}
+      </main>
     </>
   );
 }

@@ -21,3 +21,18 @@ export async function register(values: UserData) {
     }
   }
 }
+
+export async function getUsersData() {
+  try {
+    const users = await fetch(`${BASE_URL}/api/users`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    return await users.json();
+  } catch (error) {
+    if (error) {
+      throw new Error();
+    }
+  }
+}
