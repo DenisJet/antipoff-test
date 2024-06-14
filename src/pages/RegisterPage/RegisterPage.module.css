@@ -48,6 +48,16 @@
   border-radius: 8px;
   margin-top: 24px;
   width: 100%;
+  cursor: pointer;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.error {
+  color: var(--error-color)
 }
 
 @media screen and (width >= 900px) {
