@@ -45,6 +45,7 @@
 .logoutButton {
   cursor: pointer;
   color: var(--white-color);
+  font-size: 16px;
   background-color: var(--primary-color);
   padding: 8px 16px;
   border: 1px solid var(--light-gray-color);
@@ -55,11 +56,35 @@
   display: none;
 }
 
+.backButtonMobile {
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  position: absolute;
+  top: 12px;
+  left: 16px;
+}
+
+.backButton {
+  cursor: pointer;
+  color: var(--white-color);
+  font-size: 16px;
+  background-color: var(--primary-color);
+  padding: 8px 16px;
+  border: 1px solid var(--light-gray-color);
+  border-radius: 8px;
+  position: absolute;
+  top: 32px;
+  left: 20px;
+  display: none;
+}
+
 @media screen and (width >= 700px) {
   .headerContainer {
     padding-top: 32px;
     display: grid;
-    grid-template-columns: 187px 1fr;
+    grid-template-columns: 297px 1fr;
     align-items: center;
     gap: 32px;
   }
@@ -77,13 +102,17 @@
   .avatar {
     grid-column: 1 / 2;
     grid-row: 1 / 2;
+    margin-left: auto;
+    margin-right: 0;
   }
 
-  .logoutButtonMobile {
+  .logoutButtonMobile,
+  .backButtonMobile {
     display: none;
   }
   
-  .logoutButton {
+  .logoutButton,
+  .backButton {
     display: block;
   }
 }
@@ -101,5 +130,9 @@
 
   .logoutButton {
     right: 80px;
+  }
+
+  .backButton {
+    left: 80px;
   }
 }

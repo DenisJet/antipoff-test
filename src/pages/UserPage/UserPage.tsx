@@ -1,4 +1,4 @@
-import { Await, useLoaderData, useNavigate } from 'react-router-dom';
+import { Await, Link, useLoaderData, useNavigate } from 'react-router-dom';
 import styles from './UserPage.module.css';
 import { UserCardProps } from '../../components/UserCard/UserCard';
 import { Suspense } from 'react';
@@ -26,6 +26,12 @@ export default function UserPage() {
                   <button className={styles.logoutButton} type='button' onClick={logout}>
                     Выход
                   </button>
+                  <Link to='/' className={styles.backButtonMobile}>
+                    <img src='/back.svg' alt='назад' />
+                  </Link>
+                  <Link to='/' className={styles.backButton}>
+                    Назад
+                  </Link>
                   <div>
                     <h1 className={styles.headerTitle}>{data.first_name + ' ' + data.last_name}</h1>
                     <p className={styles.headerText}>Партнёр</p>
