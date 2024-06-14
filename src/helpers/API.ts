@@ -24,7 +24,7 @@ export async function register(values: UserData) {
 
 export async function getUsersData() {
   try {
-    const users = await fetch(`${BASE_URL}/api/users`, {
+    const users = await fetch(`${BASE_URL}/api/users?per_page=8`, {
       headers: {
         'Content-Type': 'application/json',
       },
