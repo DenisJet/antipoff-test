@@ -68,7 +68,7 @@
   cursor: pointer;
 }
 
-@media screen and (width >= 700px) {
+@media screen and (width >= 900px) {
   .headerContainer {
     padding-top: 32px;
   }

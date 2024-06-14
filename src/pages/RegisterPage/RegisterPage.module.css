@@ -50,7 +50,7 @@
   width: 100%;
 }
 
-@media screen and (width >= 700px) {
+@media screen and (width >= 900px) {
   .main {
     height: 100vh;
   }

@@ -80,7 +80,41 @@
   display: none;
 }
 
-@media screen and (width >= 700px) {
+.main {
+  padding: 32px 16px;
+  max-width: 630px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.contacts {
+  margin-bottom: 32px;
+}
+
+.contactLink {
+  display: flex;
+  align-items: center;
+}
+
+.contactLink:first-child {
+  margin-bottom: 24px;
+}
+
+.contactLink img {
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+}
+
+.mainTextContainer {
+  max-width: 630px;
+}
+
+.mainTextContainer p {
+  margin-top: 0;
+}
+
+@media screen and (width >= 900px) {
   .headerContainer {
     padding-top: 32px;
     display: grid;
@@ -124,8 +158,17 @@
   }
 
   .main {
-    padding-left: 80px;
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    padding-top: 48px;
+    padding-left: 297px;
     padding-right: 80px;
+    max-width: 100%;
+  }
+
+  .contacts {
+    grid-column: -1 / -2;
+    grid-row: 1 / 2;
   }
 
   .logoutButton {
