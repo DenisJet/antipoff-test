@@ -8,27 +8,32 @@ export default function AllUsersPage() {
   const [users, setUsers] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | undefined>();
+  const [page, setPage] = useState(1);
   const navigate = useNavigate();
 
   useEffect(() => {
+    const getUsers = async () => {
+      try {
+        setIsLoading(true);
+        const { data } = await getUsersData(page.toString());
+        setUsers(users.concat(data));
+      } catch (error) {
+        setError('Не удалось загрузить данные...');
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    console.log(page);
     getUsers();
-  }, []);
-
-  const getUsers = async () => {
-    try {
-      setIsLoading(true);
-      const { data } = await getUsersData();
-      setUsers(data);
-      setIsLoading(false);
-    } catch (error) {
-      setError('Не удалось загрузить данные...');
-      setIsLoading(false);
-    }
-  };
+  }, [page]);
 
   const logout = () => {
     localStorage.removeItem('token');
     navigate('/register');
+  };
+
+  const pageHandler = () => {
+    setPage(page + 1);
   };
 
   return (
@@ -53,7 +58,7 @@ export default function AllUsersPage() {
         {!isLoading && !error && (
           <>
             <UserList users={users} />
-            <button className={styles.buttonMore} type='button'>
+            <button disabled={page >= 2} onClick={pageHandler} className={styles.buttonMore} type='button'>
               Показать ещё
               <img src='/more.svg' alt='' />
             </button>
