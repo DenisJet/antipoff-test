@@ -39,26 +39,26 @@ export function RegisterPage() {
     }
   }, [emailError, passwordError]);
 
-  const emailHandler = (e) => {
-    setEmail(e.target.value);
-    if (!emailValidation(e.target.value)) {
+  const emailHandler = (e: FormEvent<HTMLInputElement>) => {
+    setEmail(e.currentTarget.value);
+    if (!emailValidation(e.currentTarget.value)) {
       setEmailError(true);
     } else {
       setEmailError(false);
     }
   };
 
-  const passwordHandler = (e) => {
-    setPassword(e.target.value);
-    if (e.target.value.length < 3) {
+  const passwordHandler = (e: FormEvent<HTMLInputElement>) => {
+    setPassword(e.currentTarget.value);
+    if (e.currentTarget.value.length < 3) {
       setPasswordError(true);
     } else {
       setPasswordError(false);
     }
   };
 
-  const blurHandler = (e) => {
-    switch (e.target.name) {
+  const blurHandler = (e: FormEvent<HTMLInputElement>) => {
+    switch (e.currentTarget.name) {
       case 'email':
         setEmailDirty(true);
         break;
