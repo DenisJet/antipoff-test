@@ -18,14 +18,20 @@ export function RegisterPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
+
   const [nameDirty, setNameDirty] = useState(false);
   const [emailDirty, setEmailDirty] = useState(false);
   const [passwordDirty, setPasswordDirty] = useState(false);
   const [passwordConfirmDirty, setPasswordConfirmDirty] = useState(false);
+
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [passwordConfirmError, setPasswordConfirmError] = useState(false);
+
+  const [passwordType, setPasswordType] = useState('password');
+  const [passwordConfirmType, setPasswordConfirmType] = useState('password');
+
   const [formValid, setFormValid] = useState(false);
 
   const navigate = useNavigate();
@@ -68,6 +74,11 @@ export function RegisterPage() {
     if (e.currentTarget.value.length < 3) {
       setPasswordError(true);
     } else {
+      if (e.currentTarget.value === passwordConfirm) {
+        setPasswordConfirmError(false);
+      } else {
+        setPasswordConfirmError(true);
+      }
       setPasswordError(false);
     }
   };
@@ -95,6 +106,22 @@ export function RegisterPage() {
       case 'passwordConfirm':
         setPasswordConfirmDirty(true);
         break;
+    }
+  };
+
+  const passwordTypeChange = () => {
+    if (passwordType === 'password') {
+      setPasswordType('text');
+    } else {
+      setPasswordType('password');
+    }
+  };
+
+  const passwordConfirmTypeChange = () => {
+    if (passwordConfirmType === 'password') {
+      setPasswordConfirmType('text');
+    } else {
+      setPasswordConfirmType('password');
     }
   };
 
@@ -155,9 +182,12 @@ export function RegisterPage() {
             onBlur={(e) => blurHandler(e)}
             id='password'
             name='password'
-            type='password'
+            type={passwordType}
             placeholder='Введите пароль'
           />
+          <span className={styles.hide} onClick={passwordTypeChange}>
+            <img src='/hide.svg' alt='показать' width={24} height={24} />
+          </span>
           {passwordDirty && passwordError && <small className={styles.error}>Ошибка</small>}
         </div>
         <div className={styles.field}>
@@ -169,9 +199,12 @@ export function RegisterPage() {
             onBlur={(e) => blurHandler(e)}
             id='passwordConfirm'
             name='passwordConfirm'
-            type='password'
+            type={passwordConfirmType}
             placeholder='Подтвердите пароль'
           />
+          <span className={styles.hide} onClick={passwordConfirmTypeChange}>
+            <img src='/hide.svg' alt='показать' width={24} height={24} />
+          </span>
           {passwordConfirmDirty && passwordConfirmError && <small className={styles.error}>Ошибка</small>}
         </div>
         <button disabled={!formValid} className={styles.button} type='submit'>

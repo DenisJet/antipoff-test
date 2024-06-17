@@ -23,7 +23,6 @@ export default function AllUsersPage() {
         setIsLoading(false);
       }
     };
-    console.log(page);
     getUsers();
   }, [page]);
 

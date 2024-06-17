@@ -28,6 +28,7 @@
   flex-direction: column;
   gap: 8px;
   margin-bottom: 16px;
+  position: relative;
 }
 
 .field input {
@@ -37,6 +38,13 @@
   background-color: var(--light-gray-color);
   border: none;
   border-radius: 8px;
+}
+
+.hide {
+  position: absolute;
+  right: 10px;
+  top: 40px;
+  cursor: pointer;
 }
 
 .button {
