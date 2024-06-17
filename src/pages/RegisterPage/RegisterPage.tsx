@@ -17,12 +17,15 @@ export function RegisterPage() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordConfirm, setPasswordConfirm] = useState('');
   const [nameDirty, setNameDirty] = useState(false);
   const [emailDirty, setEmailDirty] = useState(false);
   const [passwordDirty, setPasswordDirty] = useState(false);
+  const [passwordConfirmDirty, setPasswordConfirmDirty] = useState(false);
   const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [passwordConfirmError, setPasswordConfirmError] = useState(false);
   const [formValid, setFormValid] = useState(false);
 
   const navigate = useNavigate();
@@ -35,12 +38,12 @@ export function RegisterPage() {
   }, [token, navigate]);
 
   useEffect(() => {
-    if (nameError || emailError || passwordError) {
+    if (nameError || emailError || passwordError || passwordConfirmError) {
       setFormValid(false);
     } else {
       setFormValid(true);
     }
-  }, [nameError, emailError, passwordError]);
+  }, [nameError, emailError, passwordError, passwordConfirmError]);
 
   const nameHandler = (e: FormEvent<HTMLInputElement>) => {
     setName(e.currentTarget.value);
@@ -69,6 +72,15 @@ export function RegisterPage() {
     }
   };
 
+  const passwordConfirmHandler = (e: FormEvent<HTMLInputElement>) => {
+    setPasswordConfirm(e.currentTarget.value);
+    if (e.currentTarget.value != password) {
+      setPasswordConfirmError(true);
+    } else {
+      setPasswordConfirmError(false);
+    }
+  };
+
   const blurHandler = (e: FormEvent<HTMLInputElement>) => {
     switch (e.currentTarget.name) {
       case 'name':
@@ -79,6 +91,9 @@ export function RegisterPage() {
         break;
       case 'password':
         setPasswordDirty(true);
+        break;
+      case 'passwordConfirm':
+        setPasswordConfirmDirty(true);
         break;
     }
   };
@@ -146,8 +161,18 @@ export function RegisterPage() {
           {passwordDirty && passwordError && <small className={styles.error}>Ошибка</small>}
         </div>
         <div className={styles.field}>
-          <label htmlFor='confirm'>Подтвердите пароль</label>
-          <input id='confirm' name='confirm' type='text' placeholder='Подтвердите пароль' />
+          <label htmlFor='passwordConfirm'>Подтвердите пароль</label>
+          <input
+            className={passwordConfirmError ? styles.inputError : ''}
+            value={passwordConfirm}
+            onChange={(e) => passwordConfirmHandler(e)}
+            onBlur={(e) => blurHandler(e)}
+            id='passwordConfirm'
+            name='passwordConfirm'
+            type='password'
+            placeholder='Подтвердите пароль'
+          />
+          {passwordConfirm && passwordConfirmError && <small className={styles.error}>Ошибка</small>}
         </div>
         <button disabled={!formValid} className={styles.button} type='submit'>
           Зарегистрироваться
