@@ -14,10 +14,13 @@ export type RegisterForm = {
 };
 
 export function RegisterPage() {
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [nameDirty, setNameDirty] = useState(false);
   const [emailDirty, setEmailDirty] = useState(false);
   const [passwordDirty, setPasswordDirty] = useState(false);
+  const [nameError, setNameError] = useState(false);
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [formValid, setFormValid] = useState(false);
@@ -32,12 +35,21 @@ export function RegisterPage() {
   }, [token, navigate]);
 
   useEffect(() => {
-    if (emailError || passwordError) {
+    if (nameError || emailError || passwordError) {
       setFormValid(false);
     } else {
       setFormValid(true);
     }
-  }, [emailError, passwordError]);
+  }, [nameError, emailError, passwordError]);
+
+  const nameHandler = (e: FormEvent<HTMLInputElement>) => {
+    setName(e.currentTarget.value);
+    if (e.currentTarget.value.length < 3) {
+      setNameError(true);
+    } else {
+      setNameError(false);
+    }
+  };
 
   const emailHandler = (e: FormEvent<HTMLInputElement>) => {
     setEmail(e.currentTarget.value);
@@ -59,6 +71,9 @@ export function RegisterPage() {
 
   const blurHandler = (e: FormEvent<HTMLInputElement>) => {
     switch (e.currentTarget.name) {
+      case 'name':
+        setNameDirty(true);
+        break;
       case 'email':
         setEmailDirty(true);
         break;
@@ -85,8 +100,20 @@ export function RegisterPage() {
       <form className={styles.form} onSubmit={submit}>
         <h2>Регистрация</h2>
         <div className={styles.field}>
-          <label htmlFor='name'>Имя</label>
-          <input id='name' name='name' type='text' placeholder='Ваше имя' />
+          <label htmlFor='name'>
+            Имя <small className={styles.passwordSmall}>(от 3х символов)</small>
+          </label>
+          <input
+            className={nameError ? styles.inputError : ''}
+            value={name}
+            onChange={(e) => nameHandler(e)}
+            onBlur={(e) => blurHandler(e)}
+            id='name'
+            name='name'
+            type='text'
+            placeholder='Ваше имя'
+          />
+          {nameDirty && nameError && <small className={styles.error}>Ошибка</small>}
         </div>
         <div className={styles.field}>
           <label htmlFor='email'>Электронная почта</label>
@@ -104,7 +131,7 @@ export function RegisterPage() {
         </div>
         <div className={styles.field}>
           <label htmlFor='password'>
-            Пароль <small className={styles.passwordSmall}>(более 3х символов)</small>
+            Пароль <small className={styles.passwordSmall}>(от 3х символов)</small>
           </label>
           <input
             className={passwordError ? styles.inputError : ''}
