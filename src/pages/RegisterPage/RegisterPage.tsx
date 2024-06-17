@@ -116,7 +116,7 @@ export function RegisterPage() {
         <h2>Регистрация</h2>
         <div className={styles.field}>
           <label htmlFor='name'>
-            Имя <small className={styles.passwordSmall}>(от 3х символов)</small>
+            Имя <small className={styles.small}>(от 3х символов)</small>
           </label>
           <input
             className={nameError ? styles.inputError : ''}
@@ -146,7 +146,7 @@ export function RegisterPage() {
         </div>
         <div className={styles.field}>
           <label htmlFor='password'>
-            Пароль <small className={styles.passwordSmall}>(от 3х символов)</small>
+            Пароль <small className={styles.small}>(от 3х символов)</small>
           </label>
           <input
             className={passwordError ? styles.inputError : ''}
@@ -172,7 +172,7 @@ export function RegisterPage() {
             type='password'
             placeholder='Подтвердите пароль'
           />
-          {passwordConfirm && passwordConfirmError && <small className={styles.error}>Ошибка</small>}
+          {passwordConfirmDirty && passwordConfirmError && <small className={styles.error}>Ошибка</small>}
         </div>
         <button disabled={!formValid} className={styles.button} type='submit'>
           Зарегистрироваться
