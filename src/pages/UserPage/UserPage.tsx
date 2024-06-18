@@ -45,9 +45,9 @@ export default function UserPage() {
                     <img src='/phone.svg' alt='телефон' />
                     +7 (954) 333-44-55
                   </Link>
-                  <Link className={styles.contactLink} to='mailto:sykfafkar@gmail.com'>
+                  <Link className={styles.contactLink} to={'mailto:' + data.email}>
                     <img src='/email.svg' alt='почта' />
-                    sykfafkar@gmail.com
+                    {data.email}
                   </Link>
                 </div>
                 <div className={styles.mainTextContainer}>
