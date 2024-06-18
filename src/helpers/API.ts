@@ -15,15 +15,3 @@ export async function register(values: UserData) {
   });
   return await token.json();
 }
-
-export async function getUsersData(page: string) {
-  const users = await fetch(
-    `${BASE_URL}/api/users?page=${page}&per_page=8&total=${(Number(page) * 6).toString()}&total_pages=${page}`,
-    {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    }
-  );
-  return await users.json();
-}
