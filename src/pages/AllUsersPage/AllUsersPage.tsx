@@ -2,16 +2,12 @@ import { useNavigate } from 'react-router-dom';
 import styles from './AllUsersPage.module.css';
 import UserList from '../../components/UserList/UserList';
 import { useEffect, useState } from 'react';
-//import { getUsersData } from '../../helpers/API';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../store/store';
 import { useSelector } from 'react-redux';
 import { getUsers } from '../../store/users.slice';
 
 export default function AllUsersPage() {
-  //const [users, setUsers] = useState([]);
-  //const [isLoading, setIsLoading] = useState(false);
-  //const [error, setError] = useState<string | undefined>();
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -20,21 +16,6 @@ export default function AllUsersPage() {
   useEffect(() => {
     dispatch(getUsers(page.toString()));
   }, [dispatch, page]);
-
-  // useEffect(() => {
-  //   const getUsers = async () => {
-  //     try {
-  //       setIsLoading(true);
-  //       const { data } = await getUsersData(page.toString());
-  //       setUsers(users.concat(data));
-  //     } catch (error) {
-  //       setError('Не удалось загрузить данные...');
-  //     } finally {
-  //       setIsLoading(false);
-  //     }
-  //   };
-  //   getUsers();
-  // }, [page]);
 
   const logout = () => {
     localStorage.removeItem('token');
