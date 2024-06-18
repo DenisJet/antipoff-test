@@ -1,17 +1,16 @@
 import { useNavigate } from 'react-router-dom';
 import styles from './AllUsersPage.module.css';
 import UserList from '../../components/UserList/UserList';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../store/store';
 import { useSelector } from 'react-redux';
-import { getUsers } from '../../store/users.slice';
+import { getUsers, usersActions } from '../../store/users.slice';
 
 export default function AllUsersPage() {
-  const [page, setPage] = useState(1);
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const { users, status } = useSelector((state: RootState) => state.users);
+  const { users, status, page } = useSelector((state: RootState) => state.users);
 
   useEffect(() => {
     dispatch(getUsers(page.toString()));
@@ -23,7 +22,7 @@ export default function AllUsersPage() {
   };
 
   const pageHandler = () => {
-    setPage(page + 1);
+    dispatch(usersActions.setPage());
   };
 
   return (

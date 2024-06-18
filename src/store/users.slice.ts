@@ -5,11 +5,13 @@ import { UserCardProps } from '../components/UserCard/UserCard';
 interface UsersState {
   users: UserCardProps[];
   status: string;
+  page: number;
 }
 
 const initialState: UsersState = {
   users: [],
   status: '',
+  page: 1,
 };
 
 export const getUsers = createAsyncThunk('users/getUsers', async (page: string) => {
@@ -28,7 +30,11 @@ export const getUsers = createAsyncThunk('users/getUsers', async (page: string) 
 export const usersSlice = createSlice({
   name: 'users',
   initialState,
-  reducers: {},
+  reducers: {
+    setPage: (state) => {
+      state.page = 2;
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getUsers.pending, (state) => {
       state.status = 'loading';
@@ -46,4 +52,4 @@ export const usersSlice = createSlice({
 });
 
 export default usersSlice.reducer;
-export const userActions = usersSlice.actions;
+export const usersActions = usersSlice.actions;
