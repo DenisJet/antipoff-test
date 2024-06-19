@@ -21,7 +21,6 @@ export default function UserCard(user: UserCardProps) {
   const likeHandler = (evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
     evt.stopPropagation();
-    console.log(user.id);
 
     dispatch(usersActions.setLike(user.id));
   };
