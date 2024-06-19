@@ -1,8 +1,12 @@
 import { FormEvent, useEffect, useState } from 'react';
 import styles from './RegisterPage.module.css';
-import { register } from '../../helpers/API';
+//import { register } from '../../helpers/API';
 import { useNavigate } from 'react-router-dom';
 import { emailValidation } from '../../helpers/formValidation';
+import { useDispatch } from 'react-redux';
+import { AppDispatch, RootState } from '../../store/store';
+import { useSelector } from 'react-redux';
+import { register } from '../../store/auth.slice';
 
 export type RegisterForm = {
   email: {
@@ -35,7 +39,10 @@ export function RegisterPage() {
   const [formValid, setFormValid] = useState(false);
 
   const navigate = useNavigate();
-  const token = localStorage.getItem('token');
+  const dispatch = useDispatch<AppDispatch>();
+  const { token } = useSelector((state: RootState) => state.auth);
+
+  //const token = localStorage.getItem('token');
 
   useEffect(() => {
     if (token) {
@@ -128,13 +135,24 @@ export function RegisterPage() {
   const submit = async (e: FormEvent) => {
     e.preventDefault();
 
-    const res = await register({ email, password });
-    if (res.token) {
-      localStorage.setItem('token', res.token);
-      navigate('/');
-    } else {
-      alert(res.error);
-    }
+    const res = await dispatch(register({ email, password }));
+
+    alert(res);
+
+    // if (res) {
+    //   localStorage.setItem('token', res);
+    //   navigate('/');
+    // } else {
+    //   alert(res);
+    // }
+
+    // const res = await register({ email, password });
+    // if (res.token) {
+    //   localStorage.setItem('token', res.token);
+    //   navigate('/');
+    // } else {
+    //   alert(res.error);
+    // }
   };
 
   return (

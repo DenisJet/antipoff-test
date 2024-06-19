@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../store/store';
 import { useSelector } from 'react-redux';
 import { getUsers, usersActions } from '../../store/users.slice';
+import { authActions } from '../../store/auth.slice';
 
 export default function AllUsersPage() {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ export default function AllUsersPage() {
   }, [dispatch, page]);
 
   const logout = () => {
-    localStorage.removeItem('token');
+    dispatch(authActions.logout());
     navigate('/register');
   };
 
