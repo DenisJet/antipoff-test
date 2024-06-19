@@ -6,12 +6,14 @@ interface UsersState {
   users: UserCardProps[];
   status: string;
   page: number;
+  likes: number[];
 }
 
 const initialState: UsersState = {
   users: [],
   status: '',
   page: 1,
+  likes: [],
 };
 
 export const getUsers = createAsyncThunk('users/getUsers', async (page: string) => {
@@ -33,6 +35,19 @@ export const usersSlice = createSlice({
   reducers: {
     setPage: (state) => {
       state.page = 2;
+    },
+    setLike: (state, action) => {
+      const existed = state.likes.find((i) => i === action.payload);
+      if (!existed) {
+        state.likes.push(action.payload);
+        return;
+      }
+
+      if (existed) {
+        const existedIndex = state.likes.indexOf(existed);
+        state.likes.splice(existedIndex, 1);
+        return;
+      }
     },
   },
   extraReducers: (builder) => {
