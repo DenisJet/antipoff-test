@@ -134,25 +134,7 @@ export function RegisterPage() {
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
-
-    const res = await dispatch(register({ email, password }));
-
-    alert(res);
-
-    // if (res) {
-    //   localStorage.setItem('token', res);
-    //   navigate('/');
-    // } else {
-    //   alert(res);
-    // }
-
-    // const res = await register({ email, password });
-    // if (res.token) {
-    //   localStorage.setItem('token', res.token);
-    //   navigate('/');
-    // } else {
-    //   alert(res.error);
-    // }
+    await dispatch(register({ email, password }));
   };
 
   return (

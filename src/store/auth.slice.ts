@@ -22,7 +22,7 @@ interface UserData {
 }
 
 export const register = createAsyncThunk('auth/register', async (values: UserData) => {
-  const token = await fetch(`${BASE_URL}/api/register`, {
+  const res = await fetch(`${BASE_URL}/api/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -32,9 +32,11 @@ export const register = createAsyncThunk('auth/register', async (values: UserDat
     .then((res) => res.json())
     .catch((e) => e.json());
 
-  console.log(token);
-
-  return await token;
+  if (res.token) {
+    return await res;
+  } else {
+    alert(res.error);
+  }
 });
 
 export const authSlice = createSlice({
