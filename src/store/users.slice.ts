@@ -1,6 +1,9 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { BASE_URL } from '../helpers/API';
 import { UserCardProps } from '../components/UserCard/UserCard';
+import { loadState } from '../helpers/localStorage';
+
+export const LIKES_PERSISTENT_STATE = 'likes';
 
 interface UsersState {
   users: UserCardProps[];
@@ -13,7 +16,7 @@ const initialState: UsersState = {
   users: [],
   status: '',
   page: 1,
-  likes: [],
+  likes: loadState(LIKES_PERSISTENT_STATE) ?? [],
 };
 
 export const getUsers = createAsyncThunk('users/getUsers', async (page: string) => {

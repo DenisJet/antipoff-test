@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../store/store';
 import { usersActions } from '../../store/users.slice';
 import { useSelector } from 'react-redux';
+import { MouseEvent } from 'react';
 
 export interface UserCardProps {
   id: number;
@@ -17,7 +18,7 @@ export default function UserCard(user: UserCardProps) {
   const dispatch = useDispatch<AppDispatch>();
   const { likes } = useSelector((state: RootState) => state.users);
 
-  const likeHandler = (evt) => {
+  const likeHandler = (evt: MouseEvent<HTMLButtonElement>) => {
     evt.preventDefault();
     evt.stopPropagation();
     console.log(user.id);
@@ -30,7 +31,7 @@ export default function UserCard(user: UserCardProps) {
       <img src={user.avatar} alt={user.first_name + ' ' + user.last_name} className={styles.avatar} />
       <p className={styles.name}>{user.first_name + ' ' + user.last_name}</p>
       <button onClick={likeHandler} className={styles.button} type='button'>
-        {likes.includes(user.id) ? (
+        {likes?.includes(user.id) ? (
           <img src='/like1.svg' alt='иконка лайка' />
         ) : (
           <img src='/like.svg' alt='иконка лайка' />
